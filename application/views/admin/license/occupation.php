@@ -1,0 +1,96 @@
+<?php $this->load->view('admin/sidebar'); ?>
+    <!-- Layout container -->
+    <div class="layout-page">
+        <!-- Content wrapper -->
+        <div class="content-wrapper">
+            <!-- Content -->
+            <?php if(isset($update_occupation)){ ?>
+            <div class="container-xxl flex-grow-1 container-p-y">
+                <h4 class="fw-bold py-3 mb-4">
+                    <span class="text-muted fw-light">नया रिकॉर्ड /</span> व्यवसाय
+                </h4>
+                <!-- Table -->
+                <div class="card">
+                    <div class="card-body">
+                        <form action="<?= base_url('License/updateOccupation/license_occupation/'.$update_occupation['id']); ?>" method="POST">
+                            <div class="mb-3">
+                                <label class="form-label" for="">व्यवसाय का नाम</label>
+                                <input type="text" name="occupation" class="form-control hindi" value="<?= $update_occupation['occupation']; ?>" required/>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <?php } else { ?>
+            <div class="container-xxl flex-grow-1 container-p-y">
+                <h4 class="fw-bold py-3 mb-4">
+                    <span class="text-muted fw-light">नया रिकॉर्ड /</span> व्यवसाय
+                </h4>
+                <!-- Table -->
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">व्यवसाय</h5>
+                        <small class="float-end">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                                व्यवसाय जोड़ें
+                            </button>
+                        </small>
+                    </div>
+                    <div class="text-nowrap">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="text-nowrap">
+                                    <th>क्र० सं०</th>
+                                    <th>व्यवसाय का नाम</th>
+                                    <th>चुनें</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i=1; foreach ($occupation as $key => $value) { ?>
+                                <tr>
+                                    <th scope="row"><?= $i++; ?></th>
+                                    <td class="hindi"><?= $value['occupation']; ?></td>
+                                    <td>
+                                        <a href="<?= base_url('License/editOccupation/license_occupation/'.$value['id']); ?>"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                    </td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--/ Table -->
+                <!-- Modal -->
+                <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalCenterTitle">व्यवसाय जोड़ें</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="<?= base_url('License/addOccupation'); ?>" method="POST">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="">व्यवसाय का नाम</label>
+                                        <input type="text" name="occupation" class="form-control hindi" id="" required/>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php } ?>
+            <!-- / Content -->
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+                <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                    <div class="mb-2 mb-md-0"> © <script>document.write(new Date().getFullYear());</script></div>
+                </div>
+            </footer> <!-- / Footer -->
+            <div class="content-backdrop fade"></div>
+        </div> <!-- Content wrapper -->
+    </div> <!-- / Layout page -->
+<?php $this->load->view('admin/footer'); ?>
